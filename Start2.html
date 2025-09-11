@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special Code Verification</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 350px;
+    }
+    h2 {
+      margin-bottom: 18px;
+      color: #2c3e50;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+    input {
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      margin-bottom: 12px;
+      width: 100%;
+      box-sizing: border-box;
+      transition: 0.3s;
+    }
+    input:focus {
+      border-color: #0072ff;
+      box-shadow: 0 0 6px rgba(0,114,255,0.4);
+      outline: none;
+    }
+    button {
+      padding: 12px;
+      background: linear-gradient(135deg, #4facfe, #0072ff);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
+      width: 100%;
+      margin-top: 8px;
+    }
+    button:hover {
+      background: linear-gradient(135deg, #0072ff, #00c6ff);
+      transform: scale(1.05);
+    }
+    .error-message {
+      color: red;
+      margin-top: 10px;
+    }
+    .code-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .code-row input {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    .code-row button {
+      width: auto;
+      white-space: nowrap;
+      margin-top: 0;
+      padding: 12px 20px;
+    }
+
+    #userCode {
+      margin-top: 12px;
+    }
+  </style>
+  <script>
+    let generatedCode = "";
+
+    function generateCode() {
+      generatedCode = Math.floor(1000 + Math.random() * 9000).toString();
+      document.getElementById('randomCode').value = generatedCode;
+    }
+
+    function validateAndRedirect() {
+      const userCode = document.getElementById('userCode').value;
+      if (userCode === generatedCode && generatedCode !== "") {
+        window.location.href = "CONNECT.html";
+      } else {
+        document.getElementById('errorMsg').textContent = "Incorrect code. Please try again.";
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>Enter Special Code</h2>
+    <div class="code-row">
+      <input type="text" id="randomCode" placeholder="4-digit code" readonly />
+      <button type="button" onclick="generateCode()">Generate Code</button>
+    </div>
+    <input type="password" id="userCode" placeholder="Enter your special code" required>
+    <button type="button" onclick="validateAndRedirect()">Continue</button>
+    <div id="errorMsg" class="error-message"></div>
+  </div>
+</body>
+</html>
